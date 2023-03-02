@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components"
+import logo from "./assets/logo.png"
+import Cards from "./components/Cards";
+import Footer from "./components/Footer";
+import GlobalStyle from "./globalStyles";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <>
+        <GlobalStyle/>
+        <Container>
+            <Header> 
+                <img src={logo} alt="Logo"/>
+                <h1>ZapRecall</h1>
+            </Header>
+            <Cards/>
+            <Footer/>
+        </Container>
+        </>
+    )
 }
 
-export default App;
+const Container = styled.div`
+	width: 100%;
+	height: 100%;
+    padding: 40px;
+	background: #FB6B6B;
+`;
+
+const Header = styled.header`
+    width: 256px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    h1{
+        width: 204px;
+        font-family: 'Righteous', cursive;
+        font-weight: 400;
+        font-size: 36px;
+        line-height: 45px;
+        letter-spacing: -0.012em;
+        text-align: center;
+        color: #FFFFFF;
+        transform: rotate(0.58deg);
+    }
+    img{
+        width: 52px;
+        height: 60px;
+    }
+`;
