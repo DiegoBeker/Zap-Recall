@@ -1,10 +1,18 @@
+import { useState } from "react";
 import styled from "styled-components"
 import logo from "./assets/logo.png"
 import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 import GlobalStyle from "./globalStyles";
 
+
 export default function App() {
+    const [finished,setFinished] = useState(0);
+
+    function incrementFinished(){
+        setFinished(finished+1);
+    }
+
     return (
         <>
         <GlobalStyle/>
@@ -13,8 +21,8 @@ export default function App() {
                 <img src={logo} alt="Logo"/>
                 <h1>ZapRecall</h1>
             </Header>
-            <Cards/>
-            <Footer/>
+            <Cards incrementFinished = {incrementFinished}/>
+            <Footer finished = {finished}/>
         </Container>
         </>
     )

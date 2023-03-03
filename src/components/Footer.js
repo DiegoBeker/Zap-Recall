@@ -1,10 +1,11 @@
 import styled from "styled-components"
+import cards from "../mock"
 
-export default function Footer(){
+export default function Footer({finished}){
     return(
         <>
         <Contador>
-            <p>0/4 CONCLUÍDOS</p>
+            <p data-test="footer">{finished}/{cards.length} CONCLUÍDOS</p>
         </Contador>
         </>
     )

@@ -6,7 +6,7 @@ import almostIcon from "../assets/icone_quase.png";
 import zapIcon from "../assets/icone_certo.png";
 import { useState } from "react";
 
-export default function Card({index,question,answer}){
+export default function Card({index,question,answer,incrementFinished}){
     const [layer,setLayer] = useState(0);
     const [answerd,setAnswerd] = useState(false);
     const [status,setStatus] = useState(setaPlay);
@@ -14,26 +14,30 @@ export default function Card({index,question,answer}){
     function selectForgot(){
         setAnswerd(true);
         setStatus(forgotIcon);
-        setLayer(0);
+        setLayer(4);
+        incrementFinished();
     }
 
     function selectAlmost(){
         setAnswerd(true);
         setStatus(almostIcon);
-        setLayer(0);
+        setLayer(4);
+        incrementFinished();
     }
 
     function selectZap(){
         setAnswerd(true);
         setStatus(zapIcon);
-        setLayer(0);
+        setLayer(4);
+        incrementFinished();
     }
     
     return(
-        <QuestionCard>
+        <QuestionCard data-test="flashcard">
                 <Face layer = {layer} status = {status}>
-                    <p>Pergunta{index+1}</p>
-                    <img 
+                    <p data-test="flashcard-text">Pergunta{index+1}</p>
+                    <img
+                        data-test="play-btn" 
                         src={status} 
                         alt="Play" 
                         onClick={() => {
@@ -44,17 +48,23 @@ export default function Card({index,question,answer}){
                     />
                 </Face>
                 <Question layer = {layer}>
-                    <p>{question}</p>
-                    <img src={setaVirar} alt="Virar" onClick={() => setLayer(2)}/>
+                    <p data-test="flashcard-text" >{question}</p>
+                    <img data-test="turn-btn" src={setaVirar} alt="Virar" onClick={() => setLayer(2)}/>
                 </Question>
                 <Answer layer = {layer}>
-                    <p>{answer}</p>
+                    <p data-test="flashcard-text">{answer}</p>
                     <Buttons>
-                        <Forgot onClick = {selectForgot}>Não Lembrei</Forgot>
-                        <Almost onClick = {selectAlmost}>Quase não lembrei</Almost>
-                        <Zap onClick = {selectZap}>Zap!</Zap>
+                        <Forgot data-test="no-btn" onClick = {selectForgot}>Não Lembrei</Forgot>
+                        <Almost data-test="partial-btn" onClick = {selectAlmost}>Quase não lembrei</Almost>
+                        <Zap data-test="zap-btn" onClick = {selectZap}>Zap!</Zap>
                     </Buttons>
                 </Answer>
+                <Finished layer= {layer} status = {status}>
+                    <p data-test="flashcard-text">Pergunta{index+1}</p>
+                    <ForgotIcon data-test="no-icon" src = {forgotIcon} status={status}/>
+                    <AlmostIcon data-test="partial-icon" src = {almostIcon} status={status}/>
+                    <ZapIcon data-test="zap-icon" src = {zapIcon} status={status}/>
+                </Finished>
         </QuestionCard>
     );
 }
@@ -84,26 +94,8 @@ const Face = styled.div`
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
-        color: ${(props) => {
-            if(props.status == zapIcon)
-                return "green"
-            if(props.status == almostIcon)
-                return "orange"
-            if(props.status == forgotIcon)
-                return "red"
-            if(props.status == setaPlay)
-                return "#333333"
-            }
-        }};
-        text-decoration: ${(props) => props.status != setaPlay ? "line-through" : "none"};
-        text-decoration-color: ${(props) => {
-            if(props.status == zapIcon)
-                return "green"
-            if(props.status == almostIcon)
-                return "orange"
-            if(props.status == forgotIcon)
-                return "red"
-        }};
+        color: #333333;
+    }
 `;
 
 const Question = styled.div`
@@ -179,4 +171,52 @@ const Almost = styled.button`
 
 const Zap = styled.button`
     background: #2FBE34
+`;
+
+const Finished = styled.div`
+    width: 300px;
+    height: 65px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
+    margin: 25px 0;
+    padding: 0 15px;
+    border-radius: 5px;
+    display: ${(props) => props.layer === 4 ? "flex" : "none"};
+    justify-content: space-between;
+    align-items: center;
+
+    p{
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        color: ${(props) => {
+            if(props.status == zapIcon)
+                return "#2FBE34"//green
+            if(props.status == almostIcon)
+                return "#FF922E"//orange
+            if(props.status == forgotIcon)
+                return "#FF3030"//red
+        }};
+        text-decoration: ${(props) => props.status != setaPlay ? "line-through" : "none"};
+        text-decoration-color: ${(props) => {
+            if(props.status == zapIcon)
+                return "#2FBE34"//green
+            if(props.status == almostIcon)
+                return "#FF922E"//orange
+            if(props.status == forgotIcon)
+                return "#FF3030"//red
+        }};
+    }
+`;
+
+const AlmostIcon = styled.img`
+    display: ${(props) => props.status == almostIcon ? "initial": "none"};
+`;
+
+const ForgotIcon = styled.img`
+    display: ${(props) => props.status == forgotIcon ? "initial": "none"};
+`;
+
+const ZapIcon = styled.img`
+    display: ${(props) => props.status == zapIcon ? "initial": "none"};
 `;

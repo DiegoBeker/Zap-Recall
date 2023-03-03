@@ -3,12 +3,12 @@ import styled from "styled-components";
 import Card from "./Card";
 import cards from "../mock"
 
-export default function Cards(){
+export default function Cards({incrementFinished}){
     
     return (
         <>
         <CardContainer>
-            {cards.map((c,index) => <Card key = {index} index = {index} question = {c.question} answer = {c.answer}/>)}
+            {cards.map((c,index) => <Card key = {index} index = {index} question = {c.question} answer = {c.answer} incrementFinished={incrementFinished}/>) }
         </CardContainer>
         </>
     );
