@@ -7,15 +7,22 @@ import GlobalStyle from "./globalStyles";
 import forgotIcon from "./assets/icone_erro.png";
 import almostIcon from "./assets/icone_quase.png";
 import zapIcon from "./assets/icone_certo.png";
+import cards from "./mock";
 
 
 export default function App() {
     const [finished,setFinished] = useState(0);
     const [initied,setInitied] = useState(false);
     const [answerQueue, setAnswerQueue] = useState([]);
+    const [wrong,setWrong] = useState(false);
+    const [end, setEnd] = useState(false);
 
     function incrementFinished(){
-        setFinished(finished+1);
+        const aux = finished +1
+        if(aux === cards.length){
+            setEnd(true);
+        }
+        setFinished(aux);
     }
 
     function queuePushIcon(icon){
@@ -23,6 +30,7 @@ export default function App() {
         switch(icon){
             case 0:
                 array.push({icon:forgotIcon, data: "no-icon"});
+                setWrong(true);
                 break;
             case 1:
                 array.push({icon:almostIcon, data: "partial-icon"});
@@ -50,7 +58,7 @@ export default function App() {
                 <h1>ZapRecall</h1>
             </Header>
             <Cards incrementFinished = {incrementFinished} queuePushIcon={queuePushIcon}/>
-            <Footer finished = {finished} answerQueue={answerQueue}/>
+            <Footer finished = {finished} answerQueue={answerQueue} wrong={wrong} end={end}/>
         </AppContainer>
         </>
     )
