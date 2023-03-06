@@ -4,8 +4,9 @@ import cards from "../mock"
 export default function Footer({finished,answerQueue}){
     return(
         <>
-        <Contador>
-            <p data-test="footer">{finished}/{cards.length} CONCLUÍDOS</p>
+        <Contador data-test="footer">
+            <p></p>
+            <p>{finished}/{cards.length} CONCLUÍDOS</p>
             <Icons>
                 {answerQueue.map((a) => (<img data-test={a.data} src={a.icon} alt=""/>))}
             </Icons>
