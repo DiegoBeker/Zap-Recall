@@ -83,7 +83,7 @@ const Face = styled.div`
     height: 65px;
     background: #FFFFFF;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-    margin: 25px 0;
+    margin: 12px 0;
     padding: 0 15px;
     border-radius: 5px;
     display: ${(props) => props.layer === 0 ? "flex" : "none"};
@@ -101,7 +101,7 @@ const Face = styled.div`
 const Question = styled.div`
     min-width: 300px;
     height: 131px;
-    margin: 25px 0;
+    margin: 12px 0;
     padding: 10px;
     background: #FFFFD5;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
@@ -126,7 +126,7 @@ const Question = styled.div`
 const Answer = styled.div`
     width: 300px;
     min-height: 131px;
-    margin: 25px 0;
+    margin: 12px 0;
     padding: 10px;
     background: #FFFFD5;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
@@ -178,7 +178,7 @@ const Finished = styled.div`
     height: 65px;
     background: #FFFFFF;
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.15);
-    margin: 25px 0;
+    margin: 12px 0;
     padding: 0 15px;
     border-radius: 5px;
     display: ${(props) => props.layer === 4 ? "flex" : "none"};
