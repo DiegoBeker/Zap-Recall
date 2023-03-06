@@ -4,14 +4,36 @@ import logo from "./assets/logo.png"
 import Cards from "./components/Cards";
 import Footer from "./components/Footer";
 import GlobalStyle from "./globalStyles";
+import forgotIcon from "./assets/icone_erro.png";
+import almostIcon from "./assets/icone_quase.png";
+import zapIcon from "./assets/icone_certo.png";
 
 
 export default function App() {
     const [finished,setFinished] = useState(0);
     const [initied,setInitied] = useState(false);
+    const [answerQueue, setAnswerQueue] = useState([]);
 
     function incrementFinished(){
         setFinished(finished+1);
+    }
+
+    function queuePushIcon(icon){
+        const array = [...answerQueue];
+        switch(icon){
+            case 0:
+                array.push({icon:forgotIcon, data: "no-icon"});
+                break;
+            case 1:
+                array.push({icon:almostIcon, data: "partial-icon"});
+                break;
+            case 2:
+                array.push({icon:zapIcon, data: "zap-icon"});
+                break;
+            default:
+                break;
+        }
+        setAnswerQueue(array);
     }
 
     return (
@@ -27,8 +49,8 @@ export default function App() {
                 <img src={logo} alt="Logo"/>
                 <h1>ZapRecall</h1>
             </Header>
-            <Cards incrementFinished = {incrementFinished}/>
-            <Footer finished = {finished}/>
+            <Cards incrementFinished = {incrementFinished} queuePushIcon={queuePushIcon}/>
+            <Footer finished = {finished} answerQueue={answerQueue}/>
         </AppContainer>
         </>
     )

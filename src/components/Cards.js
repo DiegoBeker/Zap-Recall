@@ -1,14 +1,22 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import cards from "../mock"
 
-export default function Cards({incrementFinished}){
+export default function Cards({incrementFinished,queuePushIcon}){
     
     return (
         <>
         <CardContainer>
-            {cards.map((c,index) => <Card key = {index} index = {index} question = {c.question} answer = {c.answer} incrementFinished={incrementFinished}/>) }
+            {cards.map((c,index) => (
+                <Card 
+                    key = {index} 
+                    index = {index} 
+                    question = {c.question} 
+                    answer = {c.answer} 
+                    incrementFinished={incrementFinished}
+                    queuePushIcon = {queuePushIcon}
+                />))
+            }
         </CardContainer>
         </>
     );

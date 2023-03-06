@@ -6,7 +6,7 @@ import almostIcon from "../assets/icone_quase.png";
 import zapIcon from "../assets/icone_certo.png";
 import { useState } from "react";
 
-export default function Card({index,question,answer,incrementFinished}){
+export default function Card({index,question,answer,incrementFinished,queuePushIcon}){
     const [layer,setLayer] = useState(0);
     const [answerd,setAnswerd] = useState(false);
     const [status,setStatus] = useState(setaPlay);
@@ -16,6 +16,7 @@ export default function Card({index,question,answer,incrementFinished}){
         setStatus(forgotIcon);
         setLayer(4);
         incrementFinished();
+        queuePushIcon(0);
     }
 
     function selectAlmost(){
@@ -23,6 +24,7 @@ export default function Card({index,question,answer,incrementFinished}){
         setStatus(almostIcon);
         setLayer(4);
         incrementFinished();
+        queuePushIcon(1);
     }
 
     function selectZap(){
@@ -30,6 +32,7 @@ export default function Card({index,question,answer,incrementFinished}){
         setStatus(zapIcon);
         setLayer(4);
         incrementFinished();
+        queuePushIcon(2);
     }
     
     return(
@@ -190,33 +193,33 @@ const Finished = styled.div`
         font-size: 16px;
         line-height: 19px;
         color: ${(props) => {
-            if(props.status == zapIcon)
+            if(props.status === zapIcon)
                 return "#2FBE34"//green
-            if(props.status == almostIcon)
+            if(props.status === almostIcon)
                 return "#FF922E"//orange
-            if(props.status == forgotIcon)
+            if(props.status === forgotIcon)
                 return "#FF3030"//red
         }};
-        text-decoration: ${(props) => props.status != setaPlay ? "line-through" : "none"};
+        text-decoration: ${(props) => props.status !== setaPlay ? "line-through" : "none"};
         text-decoration-color: ${(props) => {
-            if(props.status == zapIcon)
+            if(props.status === zapIcon)
                 return "#2FBE34"//green
-            if(props.status == almostIcon)
+            if(props.status === almostIcon)
                 return "#FF922E"//orange
-            if(props.status == forgotIcon)
+            if(props.status === forgotIcon)
                 return "#FF3030"//red
         }};
     }
 `;
 
 const AlmostIcon = styled.img`
-    display: ${(props) => props.status == almostIcon ? "initial": "none"};
+    display: ${(props) => props.status === almostIcon ? "initial": "none"};
 `;
 
 const ForgotIcon = styled.img`
-    display: ${(props) => props.status == forgotIcon ? "initial": "none"};
+    display: ${(props) => props.status === forgotIcon ? "initial": "none"};
 `;
 
 const ZapIcon = styled.img`
-    display: ${(props) => props.status == zapIcon ? "initial": "none"};
+    display: ${(props) => props.status === zapIcon ? "initial": "none"};
 `;
