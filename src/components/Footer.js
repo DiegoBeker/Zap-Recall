@@ -3,11 +3,11 @@ import cards from "../mock"
 import party from "../assets/party.png"
 import sad from "../assets/sad.png"
 
-export default function Footer({finished,answerQueue,wrong,end}){
+export default function Footer({finished,answerQueue,wrong,endRecall}){
     return(
         <>
         <Contador data-test="footer">
-            <Message end={end} data-test="finish-text">
+            <Message endRecall={endRecall} data-test="finish-text">
                 <div>
                     <img src={wrong ? sad : party} alt=""/>
                     <p><span>{wrong ? "Putz..." : "Parabéns!"}!</span></p>
@@ -53,7 +53,7 @@ const Icons = styled.div`
 
 const Message = styled.div`
     width: 222px;
-    display: ${(props) => props.end ? "flex" : "none"};
+    display: ${(props) => props.endRecall ? "flex" : "none"};
     flex-direction: column;
     align-items: center;
     text-align: center;

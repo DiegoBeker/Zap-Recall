@@ -15,12 +15,12 @@ export default function App() {
     const [initied,setInitied] = useState(false);
     const [answerQueue, setAnswerQueue] = useState([]);
     const [wrong,setWrong] = useState(false);
-    const [end, setEnd] = useState(false);
+    const [endRecall, setEndRecall] = useState(false);
 
     function incrementFinished(){
         const aux = finished +1
         if(aux === cards.length){
-            setEnd(true);
+            setEndRecall(true);
         }
         setFinished(aux);
     }
@@ -30,7 +30,8 @@ export default function App() {
         switch(icon){
             case 0:
                 array.push({icon:forgotIcon, data: "no-icon"});
-                setWrong(true);
+                if(wrong === false)
+                    setWrong(true);
                 break;
             case 1:
                 array.push({icon:almostIcon, data: "partial-icon"});
@@ -58,7 +59,7 @@ export default function App() {
                 <h1>ZapRecall</h1>
             </Header>
             <Cards incrementFinished = {incrementFinished} queuePushIcon={queuePushIcon}/>
-            <Footer finished = {finished} answerQueue={answerQueue} wrong={wrong} end={end}/>
+            <Footer finished = {finished} answerQueue={answerQueue} wrong={wrong} endRecall={endRecall}/>
         </AppContainer>
         </>
     )
